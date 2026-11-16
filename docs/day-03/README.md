@@ -67,14 +67,5 @@ Repeat the curl command from Kali. Then open **Status → System Logs → Firewa
 
 A ping success does not guarantee TCP/80 success. A timeout alone does not prove that the firewall caused the failure. Also, traffic between VMs on the same Layer-2 network may bypass pfSense.
 
-## Evidence checklist
-
-- [ ] Ubuntu terminal showing the HTTP server running
-- [ ] Kali baseline curl output
-- [ ] pfSense rule screenshot showing interface, action, source, destination, TCP and port 80
-- [ ] Kali curl output after the rule change
-- [ ] Matching firewall log entry
-- [ ] State-table evidence for the successful Pass case
-
 ## Key lesson
 Protocol and destination port narrow a policy to a particular service. Confirm the packet path and a successful baseline before interpreting a failed connection as a firewall block.
