@@ -36,7 +36,7 @@ A company needs to allow approved traffic while denying unwanted connections. Ov
 
 Example: block one test host from reaching an HTTP server, while allowing other approved traffic. Place the specific Block rule above a broader Pass rule that would otherwise match the same packet.
 
-| Test | Expected result | Evidence required |
+| Test | Expected result | How to confirm |
 |---|---|---|
 | Packet matches specific Block | Denied | Failed client test plus matching Block log |
 | Packet matches specific Pass | Allowed | Successful client test plus matching Pass log/state |
@@ -52,14 +52,6 @@ The table describes the intended exercise, not a claim that each pfSense test ha
 - Use the narrowest protocol, host/network and port needed.
 - A timeout by itself does not prove that a particular rule blocked traffic.
 - Existing states can affect retests. Inspect **Diagnostics → States** and clear only the relevant test state when appropriate.
-
-## Evidence checklist
-
-- [ ] OPT1 rules screenshot before and after reordering
-- [ ] Specific Block rule and broader Pass rule
-- [ ] Client command/output for each test
-- [ ] Matching firewall log entries
-- [ ] Explanation of which rule matched and why
 
 ## Key lesson
 The correct action, interface, match criteria and rule order must all agree with the real packet path. Do not leave broad troubleshooting rules enabled as permanent policy.
