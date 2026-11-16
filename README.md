@@ -42,6 +42,8 @@ The status below separates what was observed in the lab from exercises that are 
 | 03 | TCP/UDP ports and HTTP testing | Test procedure documented. A successful HTTP baseline and matching TCP/80 rule/log evidence have not yet been recorded. |
 | 04 | IP aliases | Configuration steps documented. An alias configured and validated in this pfSense lab has not yet been confirmed. |
 | 05 | NAT and WAN port forwarding | A port-forward test was attempted. An HTTP 301 response and an Ubuntu request log were observed, but the external port, redirect port and Ubuntu listening port did not yet match clearly enough to call the mapping fully verified. |
+| 06 | Firewall log analysis | Log analysis practical documented: reviewed Pass/Block events and correlated packet details with rules and client/server results. Redacted event screenshots and a representative evidence set are still pending. |
+| 07 | pfBlockerNG DNSBL | pfBlockerNG DNSBL configured on pfSense with a custom `youtube.com` entry and Unbound. `nslookup` returned the DNSBL virtual IP `10.10.10.1`; browser-level blocking was not fully verified because the site could still open. |
 
 ## Documentation
 
@@ -51,6 +53,8 @@ The status below separates what was observed in the lab from exercises that are 
 - [Day 3 — Protocol, port and HTTP testing](docs/day-03/README.md)
 - [Day 4 — IP aliases](docs/day-04/README.md)
 - [Day 5 — NAT and port forwarding](docs/day-05/README.md)
+- [Day 6 — Firewall log analysis](docs/day-06/README.md)
+- [Day 7 — pfBlockerNG DNSBL](docs/day-07/README.md)
 - [Configuration register](docs/configuration/README.md)
 
 ## Useful pfSense pages
@@ -76,5 +80,7 @@ This is an isolated learning lab. I do not expose the test services or pfSense a
 3. Get a successful HTTP baseline, then test a specific TCP/80 Block and Pass rule.
 4. Configure and validate the Day 4 IP alias in pfSense.
 5. Confirm the exact external-to-internal port mapping for Day 5 and add the remaining evidence.
+6. Add redacted firewall-log evidence and a representative correlated test record for Day 6.
+7. Finish the Day 7 browser-level DNSBL test, including checks for DNS-over-HTTPS, cached records and alternate domains.
 
 I will mark an exercise as verified only after the test result and the relevant evidence agree.
