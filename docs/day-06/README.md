@@ -33,15 +33,10 @@ I used the pfSense firewall log to follow traffic generated during the lab tests
 - A timeout by itself is not enough to identify pfSense as the cause. Correlate the client result with the firewall log and, where possible, the server-side log.
 - Existing connection states can affect repeat tests. Inspect **Diagnostics → States** when a rule change does not appear to affect an existing connection.
 
-## Evidence status
+## Current status
 
-The firewall-log analysis exercise has been carried out as part of the lab. This public write-up does not include a specific log screenshot, timestamp or copied event row yet. Add a redacted screenshot and one representative event before treating the evidence pack as complete.
+The log-analysis exercise has been carried out. I still need to add a redacted screenshot and one example event alongside the client test that generated it.
 
-- [ ] Redacted firewall log screenshot
-- [ ] Client command/output that generated the event
-- [ ] Explanation of source, destination, protocol, interface and action
-- [ ] Matching firewall rule
-- [ ] Server-side evidence where the test involves an application
 
 ## Key lesson
 
