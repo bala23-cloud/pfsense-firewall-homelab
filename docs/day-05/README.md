@@ -71,18 +71,6 @@ sudo ss -lntp
 
 Compare the output with **Firewall → NAT → Port Forward**. Use the exact external port in the Kali curl URL. Do not claim a specific internal port until these values match.
 
-## Evidence checklist
-
-- [ ] Screenshot of the pfSense Port Forward rule, with private addresses redacted.
-- [ ] Screenshot of the associated WAN filter rule.
-- [ ] Kali terminal showing the exact curl command and complete output.
-- [ ] Ubuntu terminal showing the test request in the server log.
-- [ ] Ubuntu `ss -lntp` output confirming the listening port.
-- [ ] Optional matching event from **Status → System Logs → Firewall**.
-- [ ] Confirmed mapping: external port → Ubuntu IP → internal service port.
-
-Do not publish raw configuration exports, credentials, public IPs or unredacted private lab details.
-
 ## Troubleshooting
 
 1. Confirm the test client is actually reaching the pfSense WAN interface. Check VirtualBox network mode and routing.
