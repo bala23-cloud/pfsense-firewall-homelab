@@ -51,23 +51,9 @@ curl -v --connect-timeout 5 http://<UBUNTU_IP>:80/
 
 Then verify all of the following:
 
-- [ ] Alias exists under **Firewall → Aliases** with the intended members.
-- [ ] OPT1 rule uses that alias as its source.
-- [ ] HTTP request succeeds when the Pass rule and network path are correct.
-- [ ] **Status → System Logs → Firewall** shows the matching TCP/80 event.
-- [ ] **Diagnostics → States** shows the connection state.
-- [ ] If a second authorized host is available, add it to the alias and verify that the same rule applies.
+Check that the alias contains the intended hosts and that the OPT1 rule uses it as the source. Then test the HTTP request and compare the result with the firewall log and state table. If a second authorized host is available, add it to the alias and check that the same rule applies.
 
 A timeout alone does not prove that the alias rule blocked traffic. Check routing, ingress interface, server listener, host firewall and the matching log entry.
-
-## Evidence checklist
-
-- [ ] Alias configuration screenshot with addresses redacted
-- [ ] Rule screenshot showing alias source and TCP/80 destination
-- [ ] Client curl output
-- [ ] Matching pfSense firewall log
-- [ ] State-table entry
-- [ ] Optional second-host test
 
 ## Key lesson
 Aliases make policies easier to maintain by separating reusable address groups from rule logic. The alias defines who matches; the firewall rule defines what happens to their traffic.
