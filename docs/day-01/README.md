@@ -67,14 +67,5 @@ These are user-reported lab observations. Screenshots, exact timestamps and corr
 - Rules: **Firewall → Rules → OPT1** (or the actual ingress interface).
 - Firewall logs: **Status → System Logs → Firewall**.
 
-## Evidence checklist
-
-- [ ] VirtualBox adapter settings
-- [ ] pfSense interface assignments and interface addresses (redacted)
-- [ ] Kali `ip -br addr` and `ip route` output
-- [ ] OPT1 rule screenshot
-- [ ] Ping outputs and matching firewall log entries
-- [ ] Windows-to-Kali troubleshooting evidence
-
 ## Key lesson
 A rule is evaluated on the interface where traffic enters pfSense. Confirm the route and ingress interface first. A broad Any-to-Any-style pass rule is useful only as a temporary diagnostic measure and should be replaced with least-privilege policy.
