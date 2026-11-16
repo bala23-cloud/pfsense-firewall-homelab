@@ -1,11 +1,11 @@
 # pfSense Firewall Homelab
 
-**Hands-on pfSense network security lab** | VirtualBox · pfSense CE/Plus · Kali Linux · Ubuntu · Windows host
+A small VirtualBox lab I use to practise firewall administration, network troubleshooting and traffic filtering with pfSense, Kali Linux and Ubuntu.
 
-## Project overview
-This repository documents a controlled VirtualBox homelab for learning firewall administration, packet flow, access-control rules, state tracking, aliases, NAT, logging and network segmentation. Each challenge separates what is configured, what was tested, what was actually observed and what still needs evidence.
+## Lab overview
 
-## Lab architecture
+The lab has a pfSense firewall with a WAN connection and two internal interfaces. Ubuntu is used as an internal test machine, and Kali is used as an authorised test client. The Windows host has also been used for connectivity checks.
+
 ```text
                  VirtualBox NAT
                        |
@@ -15,52 +15,66 @@ This repository documents a controlled VirtualBox homelab for learning firewall 
                  |            |
               Ubuntu         Kali
 ```
-The diagram is a logical overview. Verify the actual VirtualBox adapters, pfSense interface assignments, routes and gateways before each test. Two VMs on the same Layer-2 network may communicate directly without their packets crossing pfSense.
+
+This is a logical view of the lab. The exact packet path depends on the VirtualBox adapter settings and the routes on each machine. Two systems on the same Layer-2 network may communicate directly without their traffic passing through pfSense.
 
 ## Lab devices
 
 | Device | Role |
 |---|---|
 | pfSense WAN | Outside connection through VirtualBox NAT |
-| pfSense LAN | Internal Ubuntu-side network |
+| pfSense LAN | Internal network for Ubuntu |
 | pfSense OPT1 | Kali test network |
-| Ubuntu | Internal test server |
-| Kali Linux | Authorized test client |
-| Windows host | Additional connectivity test source; Windows-to-Kali test remains pending |
+| Ubuntu | Internal test machine / HTTP test server |
+| Kali Linux | Authorised test client |
+| Windows host | Additional connectivity test source |
 
-Public documentation uses placeholders such as `<KALI_IP>`, `<UBUNTU_IP>` and `<OPT1_GATEWAY>`. Replace them locally with current lab values before running commands.
+Private addresses are intentionally left out of this public repository. Placeholders such as `<KALI_IP>`, `<UBUNTU_IP>` and `<OPT1_GATEWAY>` are used in the notes.
 
-## Learning path
+## Progress so far
 
-| Day | Topic | pfSense lab status |
+The status below separates what was observed in the lab from exercises that are documented but still need a complete test record.
+
+| Day | Topic | Current status |
 |---|---|---|
-| 01 | Interface setup and basic connectivity | Interfaces and basic Kali/Ubuntu connectivity tested; evidence screenshots pending |
-| 02 | PASS/BLOCK rules, matching and rule order | Learning notes added; targeted rule-order validation pending |
-| 03 | TCP/UDP ports, HTTP testing and state tracking | Ping connectivity is reported; HTTP/TCP test and state evidence pending |
-| 04 | IP aliases and reusable firewall policies | Documentation added; alias configuration and validation in pfSense pending |
-| 05 | NAT — WAN port forwarding to an Ubuntu test service | Initial test documented; external/target/listener port mapping needs confirmation |\n| 06–15 | Segmentation, outbound NAT, DHCP/DNS, logging, VPN, HA, IDS/IPS and capstone | Planned |
+| 01 | Interface setup and basic connectivity | Initial setup completed. Kali reached the OPT1 gateway after a temporary pass rule was added; Kali and Ubuntu ping connectivity was reported. Windows-to-Kali connectivity is still unresolved, and screenshots/log evidence are pending. |
+| 02 | PASS/BLOCK rules and rule order | Concepts and test procedure documented. A complete targeted rule-order test with client output and matching firewall logs is still pending. |
+| 03 | TCP/UDP ports and HTTP testing | Test procedure documented. A successful HTTP baseline and matching TCP/80 rule/log evidence have not yet been recorded. |
+| 04 | IP aliases | Configuration steps documented. An alias configured and validated in this pfSense lab has not yet been confirmed. |
+| 05 | NAT and WAN port forwarding | A port-forward test was attempted. An HTTP 301 response and an Ubuntu request log were observed, but the external port, redirect port and Ubuntu listening port did not yet match clearly enough to call the mapping fully verified. |
 
 ## Documentation
 
 - [Day 1 — Setup and connectivity](docs/day-01/README.md)
 - [Day 1 — Network architecture](docs/day-01/network-architecture.md)
-- [Day 2 — Rule processing and order](docs/day-02/README.md)
-- [Day 3 — Protocol, port and stateful testing](docs/day-03/README.md)
+- [Day 2 — PASS/BLOCK rules and rule order](docs/day-02/README.md)
+- [Day 3 — Protocol, port and HTTP testing](docs/day-03/README.md)
 - [Day 4 — IP aliases](docs/day-04/README.md)
+- [Day 5 — NAT and port forwarding](docs/day-05/README.md)
 - [Configuration register](docs/configuration/README.md)
 
-## pfSense dashboard paths used in this lab
+## Useful pfSense pages
 
-- Rules: **Firewall → Rules → [interface tab]**
+- Firewall rules: **Firewall → Rules**
+- NAT / port forwarding: **Firewall → NAT → Port Forward**
 - Aliases: **Firewall → Aliases**
 - Firewall logs: **Status → System Logs → Firewall**
 - Active connections: **Diagnostics → States**
 
-## Evidence standard
-A rule being saved does not prove that it worked. For each test, record the exact client command/output, the matching pfSense log entry and (where useful) the active state. A timeout alone does not prove a firewall block. Do not use an ICMP log entry as proof that a TCP/80 request was blocked.
+## How I record a test
 
-## Safety and privacy
-Keep test services on isolated lab networks. Do not expose them to the public internet. Do not publish passwords, API keys, raw configuration exports or screenshots containing private details. Redact addresses and host identifiers before committing evidence.
+For each practical, I want to keep the configuration, the command used from the client, the actual output and the matching pfSense log together. Saving a rule is not enough to prove that the traffic behaved as expected. A timeout on its own is not proof that pfSense blocked a packet.
 
-## Current next step
-Complete the Day 2 targeted rule-order test, then establish a successful HTTP baseline for Day 3 before applying a TCP/80 policy. Only mark a result verified after collecting the client output and corresponding pfSense log.
+## Safety
+
+This is an isolated learning lab. I do not expose the test services or pfSense administration interface to the public internet. Before publishing screenshots or configuration details, I remove private addresses, credentials, keys and other personal information.
+
+## Next things to finish
+
+1. Resolve the Windows-to-Kali connectivity issue and record the result.
+2. Complete the Day 2 rule-order test with a matching firewall log.
+3. Get a successful HTTP baseline, then test a specific TCP/80 Block and Pass rule.
+4. Configure and validate the Day 4 IP alias in pfSense.
+5. Confirm the exact external-to-internal port mapping for Day 5 and add the remaining evidence.
+
+I will mark an exercise as verified only after the test result and the relevant evidence agree.
