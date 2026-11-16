@@ -41,15 +41,6 @@ The browser could still open YouTube during the test. Therefore, the DNS lookup 
 5. Identify any additional domains required for the intended test, then add only the necessary entries.
 6. Retest with `nslookup` and a browser, recording the two outcomes separately.
 
-## Evidence checklist
-
-- [ ] pfBlockerNG DNSBL configuration screenshot with private details redacted
-- [ ] Custom `youtube.com` DNSBL entry
-- [ ] Unbound DNS resolver configuration
-- [ ] `nslookup` command and output showing the DNSBL virtual IP
-- [ ] Browser test result and notes on DNS-over-HTTPS/cache behaviour
-- [ ] Relevant pfBlockerNG / Unbound logs
-
 ## Security note
 
 DNSBL is a useful DNS-layer control, but it should not be treated as a complete web-filtering or application-control solution. Clients that bypass the configured resolver may not be affected. Use it as one layer in a broader network policy.
